@@ -1,6 +1,6 @@
 import './App.css';
 import GetData from './components/getData';
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 
 function App() {

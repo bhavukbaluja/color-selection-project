@@ -4,11 +4,6 @@ import axios from "axios";
 
 const GetData = ({ NodeUrl }) => {
     const [data, setData] = useState([]);
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const fetchData = async () => {
         try {
             const response = await axios.get(NodeUrl + "get-data");
@@ -17,6 +12,9 @@ const GetData = ({ NodeUrl }) => {
             console.error("Error fetching data:", error);
         }
     };
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const deleteEntry = async (id) => {
         try {
