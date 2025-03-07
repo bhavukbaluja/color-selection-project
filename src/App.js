@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import HomePage from './components/HomePage';
 
 function App() {
-  const hostName = window.location.origin.replace(/:\d+$/, ":9090");
+  const hostName = window.location.origin.replace(/:\d+$/, ":9090/");
   debugger;
   return (
     <div className="App">
