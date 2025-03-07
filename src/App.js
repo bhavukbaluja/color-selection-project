@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import HomePage from './components/HomePage';
 
 function App() {
-  const hostName = window.location.origin.replace(/:\d+$/, ":9090/");
-  debugger;
+  // console.log('All env variables:', process.env);
+  // console.log('Specific variable:', process.env.REACT_APP_NODE_URL);
+    const NodeUrl = process.env.REACT_APP_NODE_URL;
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage  hostName={hostName}/>}/>
-          <Route path="/abcfdfedewsfetdfgjfergitrdfgvr" element={<GetData hostName={hostName}/>} />
+          <Route path="/" element={<HomePage  NodeUrl={NodeUrl}/>}/>
+          <Route path="/abcfdfedewsfetdfgjfergitrdfgvr" element={<GetData NodeUrl={NodeUrl}/>} />
         </Routes>
       </Router>
     

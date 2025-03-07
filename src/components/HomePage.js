@@ -21,7 +21,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
     
-const HomePage=({hostName})=>{
+const HomePage=({NodeUrl})=>{
     const [open, setOpen] = useState(false);
     const [result, setResult] = useState(null);
     const [mustSpin, setMustSpin] = useState(false);
@@ -80,7 +80,7 @@ const HomePage=({hostName})=>{
                 </IconButton>
                 <DialogContent dividers>
                     <RouletteWheel 
-                        hostName={hostName} 
+                        NodeUrl={NodeUrl} 
                         result={result} 
                         setResult={setResult} 
                         mustSpin={mustSpin} 

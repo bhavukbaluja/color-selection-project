@@ -4,7 +4,7 @@ import { Wheel } from "react-custom-roulette";
 import axios from "axios";
 import "./Wheel.scss";
 
-const RouletteWheel = ({ hostName, result, setResult, mustSpin, setMustSpin, name, setName }) => {
+const RouletteWheel = ({ NodeUrl, result, setResult, mustSpin, setMustSpin, name, setName }) => {
   const [error, setError] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [usedColors, setUsedColors] = useState([]);
@@ -26,7 +26,7 @@ const RouletteWheel = ({ hostName, result, setResult, mustSpin, setMustSpin, nam
 
   const fetchUsedColors = async () => {
     try {
-      const response = await axios.get(hostName + "get-data");
+      const response = await axios.get(NodeUrl + "get-data");
       setUsedColors(response.data.map((entry) => entry.color));
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -68,7 +68,7 @@ const RouletteWheel = ({ hostName, result, setResult, mustSpin, setMustSpin, nam
 
   const saveResult = async (userName, colorWon) => {
     try {
-      await axios.post(hostName + "save-data", { name: userName, color: colorWon });
+      await axios.post(NodeUrl + "save-data", { name: userName, color: colorWon });
       fetchUsedColors();
     } catch (error) {
       console.error("Error saving data:", error);

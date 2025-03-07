@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from "@mui/material";
 import axios from "axios";
 
-const GetData = ({ hostName }) => {
+const GetData = ({ NodeUrl }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const GetData = ({ hostName }) => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(hostName + "get-data");
+            const response = await axios.get(NodeUrl + "get-data");
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -20,7 +20,7 @@ const GetData = ({ hostName }) => {
 
     const deleteEntry = async (id) => {
         try {
-            await axios.delete(`${hostName}delete-data/${id}`);
+            await axios.delete(`${NodeUrl}delete-data/${id}`);
             fetchData(); // Refresh data after deletion
             alert("Entry deleted successfully!");
         } catch (error) {
@@ -30,7 +30,7 @@ const GetData = ({ hostName }) => {
 
     const resetData = async () => {
         try {
-            await axios.post(`${hostName}reset-data`);
+            await axios.post(`${NodeUrl}reset-data`);
             fetchData(); // Refresh data after reset
             alert("All data has been reset!");
         } catch (error) {
