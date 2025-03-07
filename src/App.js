@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import RouletteWheel from './components/wheel/RouletteWheel';
 import GetData from './components/getData';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import HomePage from './components/HomePage';
