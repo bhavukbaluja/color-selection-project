@@ -1,5 +1,5 @@
 import { TextField, Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Wheel } from "react-custom-roulette";
 import axios from "axios";
 import "./Wheel.scss";
@@ -20,18 +20,19 @@ const RouletteWheel = ({ NodeUrl, result, setResult, mustSpin, setMustSpin, name
   const textColors = ["#ffffff", "#000", "#ffffff", "#ffffff", "#000"];
 
   
-  const fetchUsedColors = async () => {
+  const fetchUsedColors = useCallback(async () => {
     try {
       const response = await axios.get(NodeUrl + "get-data");
       setUsedColors(response.data.map((entry) => entry.color));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
-
-  useEffect(() => {
-    fetchUsedColors();
-}, [fetchUsedColors]); 
+  }, [NodeUrl]); // Depend only on NodeUrl
+  
+  // useEffect(() => {
+  //   fetchUsedColors();
+  // }, [fetchUsedColors]);
+  
 
 
   const getUniqueColorIndex = () => {
@@ -49,7 +50,7 @@ const RouletteWheel = ({ NodeUrl, result, setResult, mustSpin, setMustSpin, name
       setError(true);
       return;
     }
-
+    fetchUsedColors();
     setError(false);
     const newPrizeNumber = getUniqueColorIndex();
     if(newPrizeNumber!==-1){

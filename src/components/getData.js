@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from "@mui/material";
 import axios from "axios";
 
 const GetData = ({ NodeUrl }) => {
     const [data, setData] = useState([]);
-    const fetchData = async () => {
+
+    const fetchData = useCallback(async () => {
         try {
-            const response = await axios.get(NodeUrl + "get-data");
+            const response = await axios.get(`${NodeUrl}get-data`);
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
-    };
+    }, [NodeUrl]); // ✅ Only re-creates if `NodeUrl` changes
+
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [fetchData]); // ✅ Prevents unnecessary re-renders
 
     const deleteEntry = async (id) => {
         try {
@@ -62,14 +64,14 @@ const GetData = ({ NodeUrl }) => {
                 <TableBody>
                     {data.length > 0 ? (
                         data.map((row) => (
-                            <TableRow key={row.id}>
+                            <TableRow key={row._id}>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.color}</TableCell>
                                 <TableCell>
                                     <Button 
                                         variant="contained" 
                                         color="secondary" 
-                                        onClick={() => deleteEntry(row.id)}
+                                        onClick={() => deleteEntry(row._id)}
                                     >
                                         Delete
                                     </Button>
