@@ -50,8 +50,8 @@ const RouletteWheel = ({ NodeUrl, result, setResult, mustSpin, setMustSpin, name
       setError(true);
       return;
     }
-    fetchUsedColors();
     setError(false);
+    await fetchUsedColors();
     const newPrizeNumber = getUniqueColorIndex();
     if(newPrizeNumber!==-1){
       setPrizeNumber(newPrizeNumber);
